@@ -5,8 +5,8 @@
         ['site/reset-password', 'token' => $user->password_reset_token]
     );
 ?>
-Hello <?= $user->username ?>,
+Здравствуйте <?= $user->username ?>,
 
-Follow the link below to reset your password:
+Перейдите по ссылке для сброса Вашего пароля:
 
 <?= $resetLink ?>

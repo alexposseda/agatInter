@@ -8,9 +8,9 @@
     );
 ?>
 <div class="password-reset">
-    <p>Hello <?= Html::encode($user->username) ?>,</p>
+    <p>Здравствуйте <?= Html::encode($user->username) ?>,</p>
 
-    <p>Follow the link below to reset your password:</p>
+    <p>Перейьите по ссылке для сброса пароля:</p>
 
     <p><?= Html::a(Html::encode($resetLink), $resetLink) ?></p>
 </div>
