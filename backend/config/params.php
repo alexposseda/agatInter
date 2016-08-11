@@ -1,4 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'storage' => [
+        'dir' => dirname(dirname(__DIR__)).'/www/storage',
+        'url' => 'http://agatinter.local/storage/'
+    ],
 ];
