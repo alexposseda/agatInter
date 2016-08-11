@@ -1,9 +1,8 @@
 <?php
-namespace frontend\models;
+namespace backend\models;
 
 use yii\base\Model;
 use yii\base\InvalidParamException;
-use common\models\User;
 
 /**
  * Password reset form
@@ -11,9 +10,10 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $password_repeat;
 
     /**
-     * @var \common\models\User
+     * @var User
      */
     private $_user;
 
@@ -43,8 +43,16 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            [['password', 'password_repeat'], 'required'],
+            ['password', 'compare'],
+            ['password', 'string', 'min' => 4],
+        ];
+    }
+
+    public function attributeLabels(){
+        return [
+            'password_repeat' => 'Введите пароль',
+            'password' => 'Подтвердите пароль'
         ];
     }
 

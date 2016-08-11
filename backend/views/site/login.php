@@ -27,9 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="form-group">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <a href="<?= \yii\helpers\Url::to(['/site/request-password-reset'])?>" class="btn btn-info">Забыли пароль?</a>
                 </div>
-
             <?php ActiveForm::end(); ?>
+
         </div>
     </div>
 </div>
