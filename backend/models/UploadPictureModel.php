@@ -21,7 +21,7 @@
         public
         function upload($directory){
             $storageDir = Yii::$app->params['storage']['dir'];
-            $fileName = uniqid(time(), true).$this->picture->extension;
+            $fileName = uniqid(time(), true).'.'.$this->picture->extension;
             $path = FileHelper::normalizePath($storageDir.DIRECTORY_SEPARATOR.$directory.DIRECTORY_SEPARATOR.$fileName);
             if($this->picture->saveAs($path)){
                 $this->savedPath = $directory.DIRECTORY_SEPARATOR.$fileName;
