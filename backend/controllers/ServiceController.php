@@ -1,14 +1,15 @@
 <?php
-
     namespace backend\controllers;
-
+    use backend\models\UploadPictureModel;
     use Yii;
     use common\models\Service;
     use backend\models\ServiceSearch;
     use yii\filters\AccessControl;
+    use yii\helpers\FileHelper;
     use yii\web\Controller;
     use yii\web\NotFoundHttpException;
     use yii\filters\VerbFilter;
+    use yii\web\UploadedFile;
 
     /**
      * ServiceController implements the CRUD actions for Service model.
@@ -17,7 +18,8 @@
         /**
          * @inheritdoc
          */
-        public function behaviors(){
+        public
+        function behaviors(){
             return [
                 'access' => [
                     'class' => AccessControl::className(),
@@ -29,6 +31,8 @@
                                 'view',
                                 'update',
                                 'delete',
+                                'upload-picture',
+                                'remove-picture'
                             ],
                             'allow' => true,
                             'roles' => ['@'],
@@ -39,6 +43,8 @@
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                        'upload-picture' => ['POST'],
+                        'remove-picture' => ['POST']
                     ],
                 ],
             ];
@@ -48,7 +54,8 @@
          * Lists all Service models.
          * @return mixed
          */
-        public function actionIndex(){
+        public
+        function actionIndex(){
             $searchModel = new ServiceSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -65,7 +72,8 @@
          *
          * @return mixed
          */
-        public function actionView($id){
+        public
+        function actionView($id){
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -80,7 +88,8 @@
          * @return Service the loaded model
          * @throws NotFoundHttpException if the model cannot be found
          */
-        protected function findModel($id){
+        protected
+        function findModel($id){
             if(($model = Service::findOne($id)) !== null){
                 return $model;
             }else{
@@ -93,9 +102,9 @@
          * If creation is successful, the browser will be redirected to the 'view' page.
          * @return mixed
          */
-        public function actionCreate(){
+        public
+        function actionCreate(){
             $model = new Service();
-
             if($model->load(Yii::$app->request->post()) && $model->save()){
                 return $this->redirect([
                                            'view',
@@ -116,9 +125,9 @@
          *
          * @return mixed
          */
-        public function actionUpdate($id){
+        public
+        function actionUpdate($id){
             $model = $this->findModel($id);
-
             if($model->load(Yii::$app->request->post()) && $model->save()){
                 return $this->redirect([
                                            'view',
@@ -139,10 +148,44 @@
          *
          * @return mixed
          */
-        public function actionDelete($id){
+        public
+        function actionDelete($id){
             $this->findModel($id)
                  ->delete();
 
             return $this->redirect(['index']);
+        }
+
+        public
+        function actionUploadPicture(){
+            $model = new UploadPictureModel();
+            $model->picture = UploadedFile::getInstanceByName('picture');
+            if($model->validate() && $model->upload(Yii::$app->params['storage']['tmpDir'])){
+                return json_encode([
+                                       'storageUrl' => Yii::$app->params['storage']['url'],
+                                       'path' => $model->getSavedPath()
+                                   ]);
+            }
+
+            return json_encode(['error' => $model->getErrors()]);
+        }
+
+        public
+        function actionRemovePicture(){
+            $path = Yii::$app->request->post('path');
+            if($path && file_exists(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path)){
+                unlink(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path);
+                $uploadedPictures = Yii::$app->session->get('uploadedPictures');
+                foreach($uploadedPictures as $key => $value){
+                    if($value == $path){
+                        unset($uploadedPictures[$key]);
+                        $uploadedPictures = array_values($uploadedPictures);
+                    }
+                }
+                Yii::$app->session->set('uploadedPictures', $uploadedPictures);
+                return true;
+            }
+
+            return false;
         }
     }
