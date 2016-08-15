@@ -9,6 +9,8 @@ use yii\widgets\Pjax;
 
 $this->title = 'Services';
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="service-index">
 
@@ -27,8 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'short_description:ntext',
-            'full_description:ntext',
-            'icon',
+//            'full_description:ntext',
+            [
+                'attribute'=>'icon',
+                'content'=>function($date){
+                    $images = json_decode($date->icon);
+                   $image = Yii::$app->params['storage']['url'].DIRECTORY_SEPARATOR.'services'.DIRECTORY_SEPARATOR.$date->id.DIRECTORY_SEPARATOR.$images[0];
+                return
+                "<img src='$image'>";
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
