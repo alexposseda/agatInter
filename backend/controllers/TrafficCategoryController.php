@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\UploadPictureModel;
 use Yii;
 use common\models\TrafficCategory;
 use backend\models\SearchTrafficCategory;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * TrafficCategoryController implements the CRUD actions for TrafficCategory model.
@@ -103,7 +105,7 @@ class TrafficCategoryController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['traffic/index']);
     }
 
     /**
@@ -121,4 +123,37 @@ class TrafficCategoryController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionUploadPicture(){
+        $model = new UploadPictureModel();
+        $model->picture = UploadedFile::getInstanceByName('picture');
+        if($model->validate() && $model->upload(Yii::$app->params['storage']['tmpDir'])){
+            return json_encode([
+                                   'storageUrl' => Yii::$app->params['storage']['url'],
+                                   'path'       => $model->getSavedPath()
+                               ]);
+        }
+
+        return json_encode(['error' => $model->getErrors()]);
+    }
+
+    public function actionRemovePicture(){
+        $path = Yii::$app->request->post('path');
+        if($path && file_exists(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path)){
+            unlink(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path);
+            $uploadedPictures = Yii::$app->session->get('uploadedPictures');
+            foreach($uploadedPictures as $key => $value){
+                if($value == $path){
+                    unset($uploadedPictures[$key]);
+                    $uploadedPictures = array_values($uploadedPictures);
+                }
+            }
+            Yii::$app->session->set('uploadedPictures', $uploadedPictures);
+
+            return true;
+        }
+
+        return false;
+    }
+
 }

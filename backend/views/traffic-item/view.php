@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\TrafficItem */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Traffic Items', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Traffic', 'url' => ['//traffic/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="traffic-item-view">

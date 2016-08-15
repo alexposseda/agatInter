@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\TrafficItem */
 
 $this->title = 'Create Traffic Item';
-$this->params['breadcrumbs'][] = ['label' => 'Traffic Items', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Traffic', 'url' => ['//traffic/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="traffic-item-create">

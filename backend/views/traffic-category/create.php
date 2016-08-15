@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\TrafficCategory */
 
 $this->title = 'Create Traffic Category';
-$this->params['breadcrumbs'][] = ['label' => 'Traffic Categories', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Traffic', 'url' => ['//traffic/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="traffic-category-create">

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\TrafficCategory */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Traffic Categories', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Traffic', 'url' => ['//traffic/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="traffic-category-view">
@@ -30,7 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'parentCategory',
+            'description:ntext',
+            'cover',
+            'map:ntext',
         ],
     ]) ?>
 

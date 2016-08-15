@@ -39,7 +39,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
-        $menuItems[] = ['label' => 'Транспорт', 'url' => ['/traffic/setting']];
+        $menuItems[] = ['label' => 'Транспорт', 'url' => ['/traffic/index']];
         $menuItems[] = ['label' => 'Услуги', 'url' => ['/service/index']];
         $menuItems[] = ['label' => 'Настройки', 'url' => ['/site/setting']];
         $menuItems[] = '<li>'

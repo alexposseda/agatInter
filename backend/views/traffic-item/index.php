@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\SearchTrafficItem */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Traffic Items';
+$this->title = 'Traffic';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="traffic-item-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Traffic Item', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Traffic Item', ['//traffic-item/create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

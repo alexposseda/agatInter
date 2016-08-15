@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\TrafficCategory */
 
 $this->title = 'Update Traffic Category: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Traffic Categories', 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Traffic', 'url' => ['//traffic/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

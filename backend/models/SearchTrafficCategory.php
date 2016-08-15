@@ -18,8 +18,8 @@ class SearchTrafficCategory extends TrafficCategory
     public function rules()
     {
         return [
-            [['id', 'parentCategory'], 'integer'],
-            [['title'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'description', 'cover', 'map'], 'safe'],
         ];
     }
 
@@ -60,10 +60,12 @@ class SearchTrafficCategory extends TrafficCategory
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'parentCategory' => $this->parentCategory,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'cover', $this->cover])
+            ->andFilterWhere(['like', 'map', $this->map]);
 
         return $dataProvider;
     }
