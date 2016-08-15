@@ -34,13 +34,12 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Галерея', 'url' => ['/gallery/index']];
+        $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Транспорт', 'url' => ['/traffic/index']];
         $menuItems[] = ['label' => 'Услуги', 'url' => ['/service/index']];
         $menuItems[] = ['label' => 'Настройки', 'url' => ['/site/setting']];
         $menuItems[] = '<li>'
