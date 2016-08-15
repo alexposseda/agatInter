@@ -3,7 +3,7 @@ return [
     'storage' => [
         'tmpDir' => 'uploads',
         'dir' => dirname(dirname(__DIR__)).'/www/storage',
-        'url' => 'http://agatinter.local/storage/'
+        'url' => 'http://agatinter.loc/storage/'
     ],
     'servicesCover' => [
         'width' => 150,

@@ -19,7 +19,7 @@ class ServiceSearch extends Service
     {
         return [
             [['id'], 'integer'],
-            [['title', 'short_description', 'full_description', 'icon'], 'safe'],
+            [['title', /*'short_description', 'full_description','icon'*/ ], 'safe'],
         ];
     }
 
