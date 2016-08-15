@@ -26,6 +26,10 @@ var maxPictureCount = "{$this->picturesCount}";
 if($('#'+targetInputId).val() != '' && JSON.parse($('#'+targetInputId).val()).length >= maxPictureCount){
     $('#uploadPictureInput').attr('disabled', 'disabled');
 }
+
+if($('#'+targetInputId).val() != ''){
+    
+}
 JS;
             Yii::$app->view->registerJs($script, View::POS_END);
             return $this->render('uploadPicture', ['pictures'=>$this->pictures]);

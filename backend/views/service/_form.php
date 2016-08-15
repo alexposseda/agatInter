@@ -8,6 +8,9 @@
     /* @var $model common\models\Service */
     /* @var $form yii\widgets\ActiveForm */
     $uploadedPictures = Yii::$app->session->get('uploadedPictures');
+    if(!$model->isNewRecord){
+        $uploadedPictures[] = 'services/'.$model->id.'/'.json_decode($model->icon)[0];
+    }
 ?>
 
 <div class="service-form">

@@ -75,6 +75,7 @@
         function beforeSave($insert){
             $icon = json_decode($this->icon)[0];
             $this->icon = substr($icon, strrpos($icon, '\\')+1);
+            $this->icon = json_encode([$this->icon]);
 
             return true;
         }
@@ -86,6 +87,9 @@
             if(!is_dir($directory)){
                 FileHelper::createDirectory($directory);
             }
+
+            $this->icon = json_decode($this->icon)[0];
+
             $image = Image::getImagine()->open($uploadsDirectory.DIRECTORY_SEPARATOR.$this->icon);
 
             $thumbBox = new Box(Yii::$app->params['servicesCover']['width'],Yii::$app->params['servicesCover']['height']);
