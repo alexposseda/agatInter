@@ -6,7 +6,7 @@
 
     /** @var \common\modules\Storage\models\StorageModel $model */
 
-    $uploadedPictures = Yii::$app->session->get('uploadedPictures');
+    $uploadedPictures = Yii::$app->session->get('picture');
     if(!$model->isNewRecord){
         $covers = json_decode($model->cover);
         foreach($covers as $cover){
@@ -20,8 +20,8 @@
 
 <?= Html::activeHiddenInput($model, 'cover', ['id' => 'service-icon']) ?>
 <?= UploadPictureWidget::widget([
-                                    'uploadUrl' => Url::to(['//storage/storage/upload-picture']),
-                                    'removeUrl' => Url::to(['storage/storage/remove-picture']),
+                                    'uploadUrl' => Url::to(['//storage/storage/upload']),
+                                    'removeUrl' => Url::to(['//storage/storage/delete']),
                                     'targetInputId' => 'service-icon',
 //                                    'pictures' => $uploadedPictures
                                     'picturesCount'=>3

@@ -11,28 +11,23 @@
     class StorageController extends Controller{
 
         public function actionIndex(){
+            //Yii::$app->session->set('picture', []);
             $model = new TrafficItem();
-            if($model->load(Yii::$app->request->post()) && $model->save()){
+            $uploadFile = Yii::$app->session->get('picture');
+            if($uploadFile){
+                StorageModel::resizeImage(Yii::$app->getModule('storage')->BaseDir.DIRECTORY_SEPARATOR.Yii::$app->params['storage']['tmpDir'], $uploadFile);
 
+                StorageModel::move(
+                    Yii::$app->getModule('storage')->BaseDir.DIRECTORY_SEPARATOR.Yii::$app->params['storage']['tmpDir'],
+                    Yii::$app->getModule('storage')->BaseDir.DIRECTORY_SEPARATOR.'test',
+                    $uploadFile);
+                Yii::$app->session->set('picture', []);
             }
 
             return $this->render('upload', ['model' => $model]);
         }
 
         public function actionUpload(){
-
-            return $this->goBack();
-        }
-
-        public function actionDelete(){
-            return 'Hello_Delete';
-        }
-
-        public function actionMove(){
-            return 'Hello_Move';
-        }
-
-        public function actionUploadPicture(){
             $model = new StorageModel();
             $model->file = UploadedFile::getInstanceByName('picture');
             if($model->validate() && $model->upload(Yii::$app->params['storage']['tmpDir'])){
@@ -44,4 +39,11 @@
 
             return json_encode(['error' => $model->getErrors()['file']]);
         }
+
+        public function actionDelete(){
+            $path = Yii::$app->request->post('path');
+
+            return StorageModel::delete($path);
+        }
+
     }
