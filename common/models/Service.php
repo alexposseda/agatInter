@@ -2,6 +2,7 @@
     namespace common\models;
     use Imagine\Image\Box;
     use Yii;
+    use yii\alexposseda\fileManager\FileManager;
     use yii\db\ActiveRecord;
     use yii\helpers\FileHelper;
     use yii\imagine\Image;
@@ -72,38 +73,8 @@
         }
 
         public
-        function beforeSave($insert){
-            $icon = json_decode($this->icon)[0];
-            $this->icon = substr($icon, strrpos($icon, '\\')+1);
-            $this->icon = json_encode([$this->icon]);
-
-            return true;
-        }
-
-        public
         function afterSave($insert, $changedAttributes){
-            $uploadsDirectory = Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.Yii::$app->params['storage']['tmpDir'];
-            $directory = Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.'services'.DIRECTORY_SEPARATOR.$this->id;
-            if(!is_dir($directory)){
-                FileHelper::createDirectory($directory);
-            }
-
-            $this->icon = json_decode($this->icon)[0];
-
-            $image = Image::getImagine()->open($uploadsDirectory.DIRECTORY_SEPARATOR.$this->icon);
-
-            $thumbBox = new Box(Yii::$app->params['servicesCover']['width'],Yii::$app->params['servicesCover']['height']);
-            $image->thumbnail($thumbBox)
-                ->save($directory.DIRECTORY_SEPARATOR.$this->icon, ['quality' => 100]);
-
-            unlink($uploadsDirectory.DIRECTORY_SEPARATOR.$this->icon);
-
-            $uploadedPictures = Yii::$app->session->get('uploadedPictures');
-            foreach($uploadedPictures as $picture){
-                if(file_exists(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$picture)){
-                    unlink(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$picture);
-                }
-            }
-            Yii::$app->session->set('uploadedPictures', []);
+            $icon = json_decode($this->icon)[0];
+            FileManager::getInstance()->removeFromSession($icon);
         }
     }
