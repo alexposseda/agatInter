@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "457bca087ccae118c70c33065d742814",
-    "content-hash": "d19e0d5812fd290117c6748c5a9b529c",
+    "hash": "f4bf0f6f55d98fa72823cd373d050a72",
+    "content-hash": "2507b46d744fb7c21412ddc30add925d",
     "packages": [
+        {
+            "name": "alexposseda/filemanager",
+            "version": "v1.0.2-stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexposseda/fileManagerForYii2.git",
+                "reference": "471257317021173c52ae421928cdfedb559f775f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/471257317021173c52ae421928cdfedb559f775f",
+                "reference": "471257317021173c52ae421928cdfedb559f775f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\alexposseda\\fileManager\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Posseda",
+                    "email": "alexposseda@gmail.com"
+                }
+            ],
+            "description": "The file manager for the Yii framework",
+            "keywords": [
+                "ajax",
+                "filemanager",
+                "uploadfile",
+                "yii2"
+            ],
+            "time": "2016-08-23 13:58:30"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
