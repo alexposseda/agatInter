@@ -6,6 +6,7 @@
     use Yii;
     use yii\alexposseda\fileManager\actions\UploadAction;
     use yii\alexposseda\fileManager\models\UploadPictureModel;
+    use yii\filters\AccessControl;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
     use yii\web\NotFoundHttpException;
@@ -16,6 +17,30 @@
          */
         public function behaviors(){
             return [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'actions' => [
+                                'index',
+                                'category-create',
+                                'item-create',
+                                'category-view',
+                                'item-view',
+                                'category-update',
+                                'item-update',
+                                'category-delete',
+                                'item-delete',
+                                'category-upload-cover',
+                                'category-remove-cover',
+                                'item-upload-cover',
+                                'item-remove-cover',
+                            ],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
