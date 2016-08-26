@@ -28,7 +28,7 @@ $(window).on('load', function () {
                     } else {
                         fmwMessageBox.find('.fmw-message').remove();
                         $(this).val('').parent().removeClass('has-success').removeClass('has-error');
-                        var item = $('<div class="col-lg-3 fmw-galleryBox-item"><img src="' + response.file.url + response.file.path + '"><div class="fmw-actions"><button type="button" class="btn btn-danger fmw-removeBtn" data-path="' + response.file.path + '"><span class="glyphicon glyphicon-remove"></span></button></div>');
+                        var item = $('<div class="col-lg-6 fmw-galleryBox-item"><img src="' + response.file.url + response.file.path + '"><div class="fmw-actions"><button type="button" class="btn btn-danger fmw-removeBtn" data-path="' + response.file.path + '"><span class="glyphicon glyphicon-remove"></span></button></div>');
                         fmwGalleryBox.append(item);
                         $(this).removeAttr('disabled');
                         addRemoveHandler();
@@ -80,6 +80,7 @@ $(window).on('load', function () {
         $('.fmw-replaceBtn').on('click', function () {
             var el = $(this).parents('.fmw-notsaved-item').clone();
             el.removeClass('fmw-notsaved-item').addClass('fmw-galleryBox-item');
+            el.find('.fmw-replaceBtn').remove();
             $(this).parents('.fmw-notsaved-item').remove();
             fmwGalleryBox.append(el);
             addFileToInput($(this).data('path'));

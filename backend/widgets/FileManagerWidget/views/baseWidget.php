@@ -18,7 +18,7 @@
                     <div class="panel-body">
                         <div class="row fmw-notsaved-gallery">
                             <?php foreach($notSavedFiles as $file): ?>
-                                <div class="col-lg-3 fmw-notsaved-item">
+                                <div class="col-lg-6 fmw-notsaved-item">
                                     <img src="<?= FileManager::getInstance()->getStorageUrl().$file ?>">
                                     <div class="fmw-actions">
                                         <button type="button" class="btn btn-danger fmw-removeBtn" data-path="<?= $file ?>">
@@ -46,7 +46,7 @@
                 if(!empty($savedFiles)):
                     foreach($savedFiles as $file):
                         ?>
-                        <div class="col-lg-3 fmw-galleryBox-item">
+                        <div class="col-lg-6 fmw-galleryBox-item">
                             <img src="<?= FileManager::getInstance()->getStorageUrl().$file?>">
                             <div class="fmw-actions">
                                 <button type="button" class="btn btn-warning fmw-removeBtn" data-path="<?= $file?>">
