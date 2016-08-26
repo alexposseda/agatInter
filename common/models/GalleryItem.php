@@ -27,7 +27,7 @@
         public function rules(){
             return [
                 [['categoryId'], 'integer'],
-                [['categoryId', 'picture'], 'required'],
+                [['picture'], 'required'],
                 [['description'], 'string'],
                 [['picture'], 'string', 'max' => 255],
                 [
