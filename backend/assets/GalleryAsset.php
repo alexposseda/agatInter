@@ -6,7 +6,7 @@
         public $sourcePath = '@backend/assets/files/gallery/';
 
         public $css = ['gallery.css'];
-        public $js = ['gallery.js'];
+        public $js = ['fileManager.js','gallery.js'];
 
         public $depends = [
             'backend\assets\AppAsset'
