@@ -49,12 +49,12 @@ JS;
                                         <img src="<?= FileManager::getInstance()->getStorageUrl().$picture ?>"
                                              class="img-responsive img-thumbnail">
                                     </div>
-                                    <div class="panel-footer">
-                                        <button class="btn btn-sm btn-danger pull-right removeBtn"
+                                    <div class="panel-footer text-center">
+                                        <button class="btn btn-sm btn-danger removeBtn"
                                                 data-path="<?= $picture ?>">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </button>
-                                        <button class="btn btn-sm btn-success pull-right replaceBtn"
+                                        <button class="btn btn-sm btn-success replaceBtn"
                                                 data-path="<?= $picture ?>">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>

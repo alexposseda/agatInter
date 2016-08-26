@@ -5,7 +5,9 @@
     use common\models\GalleryItem;
     use common\models\GalleryModel;
     use Yii;
+    use yii\alexposseda\fileManager\actions\UploadAction;
     use yii\alexposseda\fileManager\FileManager;
+    use yii\alexposseda\fileManager\models\UploadPictureModel;
     use yii\filters\AccessControl;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
@@ -46,6 +48,20 @@
          */
         public function actions(){
             return [
+                'upload-picture' => [
+                    'class' => UploadAction::className(),
+                    'uploadPath' => 'gallery',
+                    'sessionEnable' => true,
+                    'uploadModel' => new UploadPictureModel([
+                                                                'validationRules' => [
+                                                                    'extensions' => 'jpg, png',
+                                                                    'maxSize' => 1024 * 1024
+                                                                ]
+                                                            ])
+                ],
+                'remove-picture' => [
+                    'class' => '\yii\alexposseda\fileManager\actions\RemoveAction',
+                ],
                 'error' => [
                     'class' => 'yii\web\ErrorAction',
                 ],
@@ -60,24 +76,14 @@
             $model = new GalleryModel();
             $model->categoryModel = new GalleryCategory();
 
-            if(Yii::$app->request->isPost){
-                return var_dump(Yii::$app->request->post());
+            if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post())){
+                if($model->save()){
+                    $this->redirect(['index']);
+                }
             }
 
             return $this->render('create', [
                 'model' => $model
             ]);
-        }
-
-        public function actionUploadPicture(){
-
-        }
-        public function actionRemovePicture(){
-            $uploadPath = 'gallery';
-            $uploadModel = new GalleryPictureModel();
-            $sessionEnable = true;
-
-            $uploadModel->file = UploadedFile::getInstanceByName(FileManager::getInstance()->getAttributeName());
-            return FileManager::getInstance()->uploadFile($uploadModel, $uploadPath, $sessionEnable);
         }
     }

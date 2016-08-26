@@ -26,7 +26,7 @@ function uploadHandler(){
                 } else {
                     messageBox.find('.alert').remove();
                     var c = $('.gallery-item').length;
-                    var item = $('<div class="gallery-item col-lg-3"><div class="panel panel-success"><div class="panel-body"><button class="btn btn-sm btn-danger pull-right removeBtn" data-path="' + response.file.path + '"><span class="glyphicon glyphicon-remove"></span></button><img src="' + response.file.url + response.file.path + '" class="img-responsive img-thumbnail"></div><div class="panel-footer"><textarea class="form-control" name="Gallery[items]['+c+'][GalleryItem][description]"></textarea><input type="hidden" name="Gallery[items]['+c+'][GalleryItem][picture]" value="'+response.file.path+'"></div></div></div>');
+                    var item = $('<div class="gallery-item col-lg-3"><div class="panel panel-success"><div class="panel-body"><button class="btn btn-sm btn-danger pull-right removeBtn" data-path="' + response.file.path + '"><span class="glyphicon glyphicon-remove"></span></button><img src="' + response.file.url + response.file.path + '" class="img-responsive img-thumbnail"></div><div class="panel-footer"><textarea class="form-control" name="items['+c+'][GalleryItem][description]"></textarea><input type="hidden" name="items['+c+'][GalleryItem][picture]" value="'+response.file.path+'"></div></div></div>');
                     gallery.append(item);
                     removeHandler();
                     replaceHandler();
@@ -72,8 +72,9 @@ function replaceHandler(){
         messageBox.find('.alert').remove();
         var el = $(this).parents('.gallery-notsaved-item');
         var c = $('.gallery-item').length;
-        var item = $('<div class="gallery-item col-lg-3"><div class="panel panel-success"><div class="panel-body"><button class="btn btn-sm btn-danger pull-right removeBtn" data-path="' + $(this).data('path') + '"><span class="glyphicon glyphicon-remove"></span></button><img src="' +el.find('img').attr('src') + '" class="img-responsive img-thumbnail"></div><div class="panel-footer"><textarea class="form-control" name="Gallery[items]['+c+'][GalleryItem][description]"></textarea><input type="hidden" name="Gallery[items]['+c+'][GalleryItem][picture]" value="'+$(this).data('path')+'"></div></div></div>');
+        var item = $('<div class="gallery-item col-lg-3"><div class="panel panel-success"><div class="panel-body"><button class="btn btn-sm btn-danger pull-right removeBtn" data-path="' + $(this).data('path') + '"><span class="glyphicon glyphicon-remove"></span></button><img src="' +el.find('img').attr('src') + '" class="img-responsive img-thumbnail"></div><div class="panel-footer"><textarea class="form-control" name="items['+c+'][GalleryItem][description]"></textarea><input type="hidden" name="items['+c+'][GalleryItem][picture]" value="'+$(this).data('path')+'"></div></div></div>');
         gallery.append(item);
+        $(this).parents('.gallery-notsaved-item').remove();
         removeHandler();
         if ($('.gallery-notsaved-item').length == 0) {
             $('#notSaved').remove();
