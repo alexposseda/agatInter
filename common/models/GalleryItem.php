@@ -17,18 +17,17 @@
         /**
          * @inheritdoc
          */
-        public static
-        function tableName(){
+        public static function tableName(){
             return '{{%gallery_item}}';
         }
 
         /**
          * @inheritdoc
          */
-        public
-        function rules(){
+        public function rules(){
             return [
                 [['categoryId'], 'integer'],
+                [['categoryId', 'picture'], 'required'],
                 [['description'], 'string'],
                 [['picture'], 'string', 'max' => 255],
                 [
@@ -41,21 +40,19 @@
         /**
          * @inheritdoc
          */
-        public
-        function attributeLabels(){
+        public function attributeLabels(){
             return [
                 'id' => 'ID',
-                'categoryId' => 'Category ID',
-                'picture' => 'Picture',
-                'description' => 'Description',
+                'categoryId' => 'Категория',
+                'picture' => 'Изображение',
+                'description' => 'Описание',
             ];
         }
 
         /**
          * @return \yii\db\ActiveQuery
          */
-        public
-        function getCategory(){
+        public function getCategory(){
             return $this->hasOne(GalleryCategory::className(), ['id' => 'categoryId']);
         }
     }

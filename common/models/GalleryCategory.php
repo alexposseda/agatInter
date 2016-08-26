@@ -15,17 +15,16 @@
         /**
          * @inheritdoc
          */
-        public static
-        function tableName(){
+        public static function tableName(){
             return '{{%gallery_category}}';
         }
 
         /**
          * @inheritdoc
          */
-        public
-        function rules(){
+        public function rules(){
             return [
+                [['title'], 'required'],
                 [['title'], 'string', 'max' => 255],
             ];
         }
@@ -33,19 +32,17 @@
         /**
          * @inheritdoc
          */
-        public
-        function attributeLabels(){
+        public function attributeLabels(){
             return [
                 'id' => 'ID',
-                'title' => 'Title',
+                'title' => 'Название',
             ];
         }
 
         /**
          * @return \yii\db\ActiveQuery
          */
-        public
-        function getGalleryItems(){
+        public function getGalleryItems(){
             return $this->hasMany(GalleryItem::className(), ['categoryId' => 'id']);
         }
     }

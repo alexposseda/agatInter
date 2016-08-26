@@ -1,5 +1,5 @@
 <?php
-    use backend\widgets\uploadPictureWidget\UploadPictureWidget;
+    use backend\widgets\FileManagerWidget\FileManagerWidget;
     use yii\bootstrap\ActiveForm;
     use yii\bootstrap\Html;
     use yii\helpers\Url;
@@ -23,12 +23,13 @@
         </div>
         <div class="col-sm-12 col-md-4 col-lg-4">
             <?= Html::activeHiddenInput($model, 'icon', ['id' => 'service-icon']) ?>
-            <?= UploadPictureWidget::widget([
-                                                'uploadUrl' => Url::to(['service/upload-picture']),
-                                                'removeUrl' => Url::to(['service/remove-picture']),
-                                                'targetInputId' => 'service-icon',
-                                                'pictures' => $uploadedPictures
-                                            ]) ?>
+            <?= FileManagerWidget::widget([
+                                              'uploadUrl' => Url::to(['upload-picture']),
+                                              'removeUrl' => Url::to(['remove-picture']),
+                                              'maxFiles' => 1,
+                                              'targetInputId' => 'service-icon',
+                                              'files' => $model->icon
+                                          ]) ?>
             <?= ($model->isNewRecord) ? Html::submitButton('Создать услугу',
                                                            ['class' => 'btn btn-success']) : Html::submitButton('Обновить услугу',
                                                                                                                 ['class' => 'btn btn-primary']) ?>

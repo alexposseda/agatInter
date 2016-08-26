@@ -4,6 +4,8 @@
 
     use Imagine\Image\Box;
     use Yii;
+    use yii\alexposseda\fileManager\FileManager;
+    use yii\db\ActiveRecord;
     use yii\helpers\FileHelper;
     use yii\imagine\Image;
 
@@ -18,7 +20,7 @@
      *
      * @property TrafficItem[] $trafficItems
      */
-    class TrafficCategory extends \yii\db\ActiveRecord{
+    class TrafficCategory extends ActiveRecord{
         /**
          * @inheritdoc
          */
@@ -31,6 +33,7 @@
          */
         public function rules(){
             return [
+                [['title', 'description'], 'required'],
                 [['description', 'map'], 'string'],
                 [['title', 'cover'], 'string', 'max' => 255],
             ];
@@ -42,7 +45,7 @@
         public function attributeLabels(){
             return [
                 'id'          => 'ID',
-                'title'       => 'Title',
+                'title'       => 'Название',
                 'description' => 'Описание',
                 'cover'       => 'Обложка',
                 'map'         => 'Карта',
@@ -56,39 +59,8 @@
             return $this->hasMany(TrafficItem::className(), ['categoryId' => 'id']);
         }
 
-
-        public function beforeSave($insert){
-            $cover= json_decode($this->cover)[0];
-            $this->cover = substr($cover, strrpos($cover, '\\')+1);
-            $this->cover = json_encode([$this->cover]);
-
-            return true;
-        }
-
         public function afterSave($insert, $changedAttributes){
-            $uploadsDirectory = Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.Yii::$app->params['storage']['tmpDir'];
-            $directory = Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.'traffic'.DIRECTORY_SEPARATOR.$this->id;
-            if(!is_dir($directory)){
-                FileHelper::createDirectory($directory);
-            }
-
-            $this->cover = json_decode($this->cover)[0];
-
-            $image = Image::getImagine()
-                          ->open($uploadsDirectory.DIRECTORY_SEPARATOR.$this->cover);
-
-            $thumbBox = new Box(Yii::$app->params['servicesCover']['width'], Yii::$app->params['servicesCover']['height']);
-            $image->thumbnail($thumbBox)
-                  ->save($directory.DIRECTORY_SEPARATOR.$this->cover, ['quality' => 100]);
-
-            unlink($uploadsDirectory.DIRECTORY_SEPARATOR.$this->cover);
-
-            $uploadedPictures = Yii::$app->session->get('uploadedPictures');
-            foreach($uploadedPictures as $picture){
-                if(file_exists(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$picture)){
-                    unlink(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$picture);
-                }
-            }
-            Yii::$app->session->set('uploadedPictures', []);
+            $icon = json_decode($this->cover)[0];
+            FileManager::getInstance()->removeFromSession($icon);
         }
     }

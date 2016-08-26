@@ -1,8 +1,11 @@
 <?php
     namespace backend\controllers;
-    use backend\models\GalleryModel;
-    use backend\models\UploadPictureModel;
+    use backend\models\GalleryPictureModel;
+    use common\models\GalleryCategory;
+    use common\models\GalleryItem;
+    use common\models\GalleryModel;
     use Yii;
+    use yii\alexposseda\fileManager\FileManager;
     use yii\filters\AccessControl;
     use yii\filters\VerbFilter;
     use yii\web\Controller;
@@ -18,13 +21,14 @@
                         [
                             'actions' => [
                                 'index',
-                                'create-category',
-                                'update-category',
-                                'delete-category',
+                                'create',
+                                'update',
+                                'delete',
                                 'upload-picture',
-                                'remove-picture'
+                                'remove-picture',
                             ],
                             'allow' => true,
+                            'roles' => ['@'],
                         ],
                     ],
                 ],
@@ -32,8 +36,6 @@
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete-category' => ['post'],
-                        'upload-picture' => ['post'],
-                        'remove-picture' => ['post'],
                     ],
                 ],
             ];
@@ -42,8 +44,7 @@
         /**
          * @inheritdoc
          */
-        public
-        function actions(){
+        public function actions(){
             return [
                 'error' => [
                     'class' => 'yii\web\ErrorAction',
@@ -51,60 +52,32 @@
             ];
         }
 
-        public
-        function actionIndex(){
+        public function actionIndex(){
             return $this->render('index');
         }
 
-        public
-        function actionCreateCategory(){
-            $galleryModel = new GalleryModel();
-            if($galleryModel->load(Yii::$app->request->post())){
-                //todo
+        public function actionCreate(){
+            $model = new GalleryModel();
+            $model->categoryModel = new GalleryCategory();
+
+            if(Yii::$app->request->isPost){
+                return var_dump(Yii::$app->request->post());
             }
 
-            return $this->render('create', ['galleryModel' => $galleryModel]);
+            return $this->render('create', [
+                'model' => $model
+            ]);
         }
 
-        public
-        function actionDeleteCategory($id){
+        public function actionUploadPicture(){
+
         }
+        public function actionRemovePicture(){
+            $uploadPath = 'gallery';
+            $uploadModel = new GalleryPictureModel();
+            $sessionEnable = true;
 
-        public
-        function actionUpdateCategory($id){
-        }
-
-        public
-        function actionUploadPicture(){
-            $model = new UploadPictureModel();
-            $model->picture = UploadedFile::getInstanceByName('picture');
-            if($model->validate() && $model->upload(Yii::$app->params['storage']['tmpDir'])){
-                return json_encode([
-                                       'storageUrl' => Yii::$app->params['storage']['url'],
-                                       'path' => $model->getSavedPath()
-                                   ]);
-            }
-
-            return json_encode(['error' => $model->getErrors()]);
-        }
-
-        public
-        function actionRemovePicture(){
-            $path = Yii::$app->request->post('path');
-            if($path && file_exists(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path)){
-                unlink(Yii::$app->params['storage']['dir'].DIRECTORY_SEPARATOR.$path);
-                $uploadedPictures = Yii::$app->session->get('uploadedPictures');
-                foreach($uploadedPictures as $key => $value){
-                    if($value == $path){
-                        unset($uploadedPictures[$key]);
-                        $uploadedPictures = array_values($uploadedPictures);
-                    }
-                }
-                Yii::$app->session->set('uploadedPictures', $uploadedPictures);
-
-                return true;
-            }
-
-            return false;
+            $uploadModel->file = UploadedFile::getInstanceByName(FileManager::getInstance()->getAttributeName());
+            return FileManager::getInstance()->uploadFile($uploadModel, $uploadPath, $sessionEnable);
         }
     }

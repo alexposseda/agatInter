@@ -18,7 +18,6 @@
             ]
             );
             $this->createIndex('parentCat', 'agi_traffic_category', 'parentCategory');
-            $this->insert('agi_traffic_category', ['id' => 1, 'title' => 'root', 'parentCategory' => null]);
         }
 
         /**

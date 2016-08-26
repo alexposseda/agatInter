@@ -1,20 +1,20 @@
 <?php
-    use backend\assets\GalleryAsset;
-    use yii\bootstrap\Html;
+    use yii\helpers\Html;
 
     /**
-     * @var \yii\web\View $this
-     * @var \backend\models\GalleryModel $galleryModel;
+     * @var yii\web\View                $this
+     * @var \common\models\GalleryModel $model
      */
-
-    $this->title = 'Create Gallery Category';
-    $this->params['breadcrumbs'][] = ['label' => 'Gallery', 'url' => ['index']];
+    $this->title = 'Создать Категорию Галереи';
+    $this->params['breadcrumbs'][] = ['label' => 'Галерея', 'url' => ['gallery/index']];
     $this->params['breadcrumbs'][] = $this->title;
-
-    GalleryAsset::register($this);
 ?>
+<div class="gallery-category-create">
 
-<div class="gallery-create">
     <h1><?= Html::encode($this->title) ?></h1>
-    <?= $this->render('_form', ['galleryModel' => $galleryModel, 'action' => 'create'])?>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
 </div>
