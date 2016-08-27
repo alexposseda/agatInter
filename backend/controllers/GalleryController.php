@@ -1,9 +1,10 @@
 <?php
     namespace backend\controllers;
-    use backend\models\GalleryPictureModel;
+
+    use backend\models\GalleryModel;
+    use backend\models\SearchGalleryItems;
     use common\models\GalleryCategory;
     use common\models\GalleryItem;
-    use common\models\GalleryModel;
     use Yii;
     use yii\alexposseda\fileManager\actions\UploadAction;
     use yii\alexposseda\fileManager\FileManager;
@@ -14,8 +15,7 @@
     use yii\web\UploadedFile;
 
     class GalleryController extends Controller{
-        public
-        function behaviors(){
+        public function behaviors(){
             return [
                 'access' => [
                     'class' => AccessControl::className(),
@@ -28,6 +28,7 @@
                                 'delete',
                                 'upload-picture',
                                 'remove-picture',
+                                'delete-item'
                             ],
                             'allow' => true,
                             'roles' => ['@'],
@@ -37,7 +38,10 @@
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete-category' => ['post'],
+                        'delete' => ['post'],
+                        'upload-picture' => ['post'],
+                        'remove-picture' => ['post'],
+                        'delete-item' => ['post'],
                     ],
                 ],
             ];
@@ -69,21 +73,64 @@
         }
 
         public function actionIndex(){
-            return $this->render('index');
+            $galleryCategories = GalleryCategory::find()
+                                                ->all();
+            $searchModel = new SearchGalleryItems();
+            $dataProvider = $searchModel->search(Yii::$app->request->get('categoryId'));
+
+            return $this->render('index', [
+                'galleryCategories' => $galleryCategories,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider
+            ]);
         }
 
         public function actionCreate(){
             $model = new GalleryModel();
-            $model->categoryModel = new GalleryCategory();
-
-            if(Yii::$app->request->isPost && $model->load(Yii::$app->request->post())){
-                if($model->save()){
-                    $this->redirect(['index']);
+            if(Yii::$app->request->isPost && $model->loadAndValidate()){
+                if($model->createCategory()){
+                    $this->redirect([
+                                        'index',
+                                        'categoryId' => $model->galleryCategory->id
+                                    ]);
                 }
             }
 
-            return $this->render('create', [
-                'model' => $model
-            ]);
+            return $this->render('create', ['model' => $model]);
+        }
+
+        public function actionUpdate($id){
+            $model = new GalleryModel(['id' => $id]);
+            if(Yii::$app->request->isPost && $model->loadAndValidate()){
+                if($model->updateCategory()){
+                    $this->redirect([
+                                        'index',
+                                        'categoryId' => $model->galleryCategory->id
+                                    ]);
+                }
+            }
+
+            return $this->render('update', ['model' => $model]);
+        }
+
+        public function actionDelete($id){
+            $model = new GalleryModel(['id' => $id]);
+            $model->deleteCategory();
+            $this->redirect(['index']);
+        }
+
+        public function actionDeleteItem(){
+            $id = Yii::$app->request->post('id');
+            if($id){
+                $galleryItem = GalleryItem::findOne($id);
+                $result = FileManager::getInstance()
+                                     ->removeFile($galleryItem->picture);
+                $tmp = json_decode($result);
+                if($tmp->success){
+                    $galleryItem->delete();
+                }
+
+                return $result;
+            }
         }
     }

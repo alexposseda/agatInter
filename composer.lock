@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "alexposseda/filemanager",
-            "version": "v1.0.2-stable",
+            "version": "v1.0.3-stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexposseda/fileManagerForYii2.git",
-                "reference": "471257317021173c52ae421928cdfedb559f775f"
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/471257317021173c52ae421928cdfedb559f775f",
-                "reference": "471257317021173c52ae421928cdfedb559f775f",
+                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,7 @@
                 "uploadfile",
                 "yii2"
             ],
-            "time": "2016-08-23 13:58:30"
+            "time": "2016-08-25 15:01:50"
         },
         {
             "name": "bower-asset/bootstrap",
