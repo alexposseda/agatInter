@@ -42,7 +42,6 @@
                                            'url' => ['frontend/traffic'],
                                            'innerMenu' => [
                                                'items' => ArrayHelper::map(TrafficCategory::find()->all(), 'id', 'title'),
-                                               'baseRoute' => 'frontend/traffic',
                                                'paramName' => 'id'
                                            ]
                                        ],
@@ -51,7 +50,6 @@
                                            'url' => ['frontend/gallery-category'],
                                            'innerMenu' => [
                                                'items' => ArrayHelper::map(GalleryCategory::find()->all(), 'id', 'title'),
-                                               'baseRoute' => 'frontend/gallery',
                                                'paramName' => 'id'
                                            ]
                                        ],

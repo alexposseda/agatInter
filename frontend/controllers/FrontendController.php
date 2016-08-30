@@ -3,6 +3,8 @@
     namespace frontend\controllers;
 
 
+    use common\models\Service;
+    use Yii;
     use yii\web\Controller;
 
     class FrontendController extends Controller{
@@ -18,6 +20,16 @@
         public function actionIndex(){
             return $this->render('index');
         }
+
+        public function actionServices($id = null){
+            $serviceItem = Service::findOne($id);
+            if(Yii::$app->request->isPjax){
+                return $this->renderAjax('_serviceItem', ['serviceItem' => $serviceItem]);
+            }
+            $services = Service::find()->asArray()->all();
+            return $this->render('services', ['services'=>$services, 'serviceItem' => $serviceItem]);
+        }
+
 
         public function actionTraffic($id){
             return $this->render('index');
@@ -39,8 +51,8 @@
             return $this->render('index');
         }
 
-        public function actionServices(){
-            return $this->render('index');
+        public function actionTest(){
+            return 'test is ok';
         }
 //        public function actionsContact(){
 //            return $this->render('contact');

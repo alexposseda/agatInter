@@ -72,14 +72,25 @@
   display: none; }
 
 .vertical-slider-scrollZone {
-  overflow: hidden; }
+  overflow: hidden;
+  padding-right: 0!important;
+}
 
 .vertical-slider-item {
-  outline: none; }
-  .vertical-slider-item.active h4 {
-    color: blue;
-    text-decoration: underline; }
-
+  outline: none;
+  transition: background-color 0.5s ease;
+}
+.vertical-slider-item a{
+  display: block;
+  color: #000;
+}
+.vertical-slider-item a:focus{
+  outline: none;
+}
+.vertical-slider-item:hover, .vertical-slider-item.active{
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.05);
+}
 .vertical-slider-button {
   position: absolute;
   width: 50px;
@@ -88,10 +99,10 @@
   transform: translateX(-50%);
   cursor: pointer; }
   .vertical-slider-button-up {
-    background: url(../img/arrowUp.png) no-repeat center;
+    background: url(../../../img/arrowUp.png) no-repeat center;
     top: -40px; }
   .vertical-slider-button-down {
-    background: url(../img/arrowDown.png) no-repeat center;
+    background: url(../../../img/arrowDown.png) no-repeat center;
     bottom: -30px; }
 
 .vertical-slider-dots {

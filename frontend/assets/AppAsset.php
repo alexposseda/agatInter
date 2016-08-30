@@ -14,7 +14,9 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/agatinter.css'
     ];
-    public $js = [];
+    public $js = [
+        'js/main.js'
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'macgyer\yii2materializecss\assets\MaterializeAsset',

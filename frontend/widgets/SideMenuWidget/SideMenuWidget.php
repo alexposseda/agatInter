@@ -13,7 +13,7 @@
                 if($outerItem['innerMenu'] and is_array($outerItem['innerMenu']['items'])){
                     foreach($outerItem['innerMenu']['items'] as $id => $title){
                         $label = $title;
-                        $url = [$outerItem['innerMenu']['baseRoute'], $outerItem['innerMenu']['paramName'] => $id];
+                        $url = [$this->menuItems[$key]['url'][0], $outerItem['innerMenu']['paramName'] => $id];
                         $outerItem['innerMenu']['items'][$id] = [
                             'label' => $label,
                             'url' => $url,
@@ -30,10 +30,12 @@
                 $this->route = Yii::$app->controller->getRoute();
             }
             foreach($this->menuItems as $key => $outerItem){
+                $isActive = false;
                 if(!isset($outerItem['labelOptions'])){
                     $this->menuItems[$key]['labelOptions'] = [];
                 }
                 if($this->isItemActive($outerItem)){
+                    $isActive = true;
                     if(isset($outerItem['labelOptions']['class'])){
                         $this->menuItems[$key]['labelOptions']['class'] .= ' active';
                     }else{
@@ -42,7 +44,7 @@
                 }
                 if(is_array($outerItem['innerMenu']['items'])){
                     foreach($outerItem['innerMenu']['items'] as $index => $item){
-                        if($item['url'][$outerItem['innerMenu']['paramName']] == Yii::$app->request->get($outerItem['innerMenu']['paramName'])){
+                        if($isActive and $item['url'][$outerItem['innerMenu']['paramName']] == Yii::$app->request->get($outerItem['innerMenu']['paramName'])){
                             $this->menuItems[$key]['innerMenu']['items'][$index]['labelOptions']['class'] = 'active';
                         }
                     }
