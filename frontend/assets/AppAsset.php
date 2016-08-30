@@ -12,12 +12,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'css/agatinter.css'
     ];
-    public $js = [
-    ];
+    public $js = [];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'macgyer\yii2materializecss\assets\MaterializeAsset',
+        'macgyer\yii2materializecss\assets\MaterializePluginAsset',
     ];
 }
