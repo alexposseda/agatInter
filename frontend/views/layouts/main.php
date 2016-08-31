@@ -47,7 +47,7 @@
                                        ],
                                        [
                                            'label' => 'Галерея',
-                                           'url' => ['frontend/gallery-category'],
+                                           'url' => ['frontend/gallery'],
                                            'innerMenu' => [
                                                'items' => ArrayHelper::map(GalleryCategory::find()->all(), 'id', 'title'),
                                                'paramName' => 'id'

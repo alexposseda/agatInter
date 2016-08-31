@@ -3,6 +3,7 @@
     namespace frontend\controllers;
 
 
+    use common\models\GalleryCategory;
     use common\models\Service;
     use Yii;
     use yii\web\Controller;
@@ -36,19 +37,20 @@
         }
 
         public function actionGallery($id){
-            return $this->render('index');
+            $gallery = GalleryCategory::findOne($id);
+            return $this->render('gallery', ['gallery' => $gallery]);
         }
 
         public function actionCertificates(){
-            return $this->render('index');
+            return $this->render('certificates');
         }
 
         public function actionContacts(){
-            return $this->render('index');
+            return $this->render('contacts');
         }
 
         public function actionAboutUs(){
-            return $this->render('index');
+            return $this->render('about');
         }
 
         public function actionTest(){

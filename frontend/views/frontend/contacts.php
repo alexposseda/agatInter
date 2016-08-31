@@ -15,7 +15,8 @@
         <div class="col s6 white fullHeight vertical-slider-scrollZone">
             <div class="valign-wrapper fullHeight">
                 <div class="valign fullWidth">
-                    <h2>О нас</h2>
+                    <h2>АгатИнтер</h2>
+                    <p>Phone</p>
                 </div>
             </div>
         </div>
