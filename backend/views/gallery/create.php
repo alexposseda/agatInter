@@ -3,7 +3,7 @@
 
     /**
      * @var yii\web\View                $this
-     * @var \common\models\GalleryModel $model
+     * @var \backend\models\GalleryModel $model
      */
     $this->title = 'Создать Категорию Галереи';
     $this->params['breadcrumbs'][] = ['label' => 'Галерея', 'url' => ['gallery/index']];

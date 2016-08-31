@@ -33,16 +33,28 @@
 
     function remove(el) {
         el.trigger('removeFile:start');
-        var attribute = settings.attribute;
-        var path = el.data('path');
-        $.ajax({
-            url: settings.removeUrl,
-            type: 'POST',
-            data: attribute + '=' + path,
-            success: function (response) {
-                el.trigger('removeFile:end', [response]);
-            }
-        });
+        if(el.data('id') !== undefined){
+            var id = el.data('id');
+            $.ajax({
+                url: settings.removeItemUrl,
+                type: 'POST',
+                data: 'id=' + id,
+                success: function (response) {
+                    el.trigger('removeFile:end', [response]);
+                }
+            });
+        }else{
+            var attribute = settings.attribute;
+            var path = el.data('path');
+            $.ajax({
+                url: settings.removeUrl,
+                type: 'POST',
+                data: attribute + '=' + path,
+                success: function (response) {
+                    el.trigger('removeFile:end', [response]);
+                }
+            });
+        }
     }
 
     $.fn.removeFile = function (options) {

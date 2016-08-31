@@ -10,6 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'frontend',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -37,7 +38,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'frontend/error',
         ],
         /*
         'urlManager' => [

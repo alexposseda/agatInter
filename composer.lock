@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4bf0f6f55d98fa72823cd373d050a72",
-    "content-hash": "2507b46d744fb7c21412ddc30add925d",
+    "hash": "516ec5139bb15f7885375db288c4bf69",
+    "content-hash": "56c47296a4bfee85eb2b1261b78aa8ce",
     "packages": [
         {
             "name": "alexposseda/filemanager",
-            "version": "v1.0.2-stable",
+            "version": "v1.0.3-stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexposseda/fileManagerForYii2.git",
-                "reference": "471257317021173c52ae421928cdfedb559f775f"
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/471257317021173c52ae421928cdfedb559f775f",
-                "reference": "471257317021173c52ae421928cdfedb559f775f",
+                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,7 @@
                 "uploadfile",
                 "yii2"
             ],
-            "time": "2016-08-23 13:58:30"
+            "time": "2016-08-25 15:01:50"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -173,6 +173,80 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/materialize",
+            "version": "v0.97.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dogfalo/materialize.git",
+                "reference": "793e5716040cb133041b55be75b1fae51debb9f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dogfalo/materialize/zipball/793e5716040cb133041b55be75b1fae51debb9f3",
+                "reference": "793e5716040cb133041b55be75b1fae51debb9f3",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=2.1.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "bin/materialize.css",
+                    "bin/materialize.js",
+                    "fonts/roboto/Roboto-Bold.ttf",
+                    "fonts/roboto/Roboto-Bold.woff",
+                    "fonts/roboto/Roboto-Bold.woff2",
+                    "fonts/roboto/Roboto-Light.ttf",
+                    "fonts/roboto/Roboto-Light.woff",
+                    "fonts/roboto/Roboto-Light.woff2",
+                    "fonts/roboto/Roboto-Medium.ttf",
+                    "fonts/roboto/Roboto-Medium.woff",
+                    "fonts/roboto/Roboto-Medium.woff2",
+                    "fonts/roboto/Roboto-Regular.ttf",
+                    "fonts/roboto/Roboto-Regular.woff",
+                    "fonts/roboto/Roboto-Regular.woff2",
+                    "fonts/roboto/Roboto-Thin.ttf",
+                    "fonts/roboto/Roboto-Thin.woff",
+                    "fonts/roboto/Roboto-Thin.woff2"
+                ],
+                "bower-asset-ignore": [
+                    "jade/",
+                    ".gitignore",
+                    "CNAME",
+                    "css/",
+                    "bower.json",
+                    "README.md",
+                    "images/",
+                    "js/jquery.timeago.js",
+                    "js/init.js",
+                    "js/prism.js",
+                    "res/",
+                    "sass/style.scss",
+                    "sass/ghpages-materialize.scss",
+                    "**/*.html",
+                    "**/*.zip",
+                    "**/*.txt",
+                    "sitemap.xml",
+                    "package.json",
+                    "Gruntfile.js"
+                ]
+            },
+            "description": "A modern responsive front-end framework based on Material Design",
+            "keywords": [
+                "css",
+                "design",
+                "framework",
+                "front-end",
+                "js",
+                "material",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "ux"
             ]
         },
         {
@@ -392,6 +466,52 @@
                 "image processing"
             ],
             "time": "2013-07-10 17:25:36"
+        },
+        {
+            "name": "macgyer/yii2-materializecss",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MacGyer/yii2-materializecss.git",
+                "reference": "101a54afe32ee96186acf2617ad83dcc1d84e438"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/101a54afe32ee96186acf2617ad83dcc1d84e438",
+                "reference": "101a54afe32ee96186acf2617ad83dcc1d84e438",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/materialize": "0.97.6",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "macgyer\\yii2materializecss\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Erdmann",
+                    "homepage": "http://www.medienpol.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Materialize CSS implementation for Yii2",
+            "homepage": "http://macgyer.github.io/yii2-materializecss",
+            "keywords": [
+                "material design",
+                "materialize",
+                "widgets",
+                "yii2"
+            ],
+            "time": "2016-08-08 19:39:42"
         },
         {
             "name": "swiftmailer/swiftmailer",
