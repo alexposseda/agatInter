@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "516ec5139bb15f7885375db288c4bf69",
-    "content-hash": "56c47296a4bfee85eb2b1261b78aa8ce",
+    "hash": "be102b0178ec03281f1c400b6347d946",
+    "content-hash": "759dd43e18370ad54eda7da7939abe88",
     "packages": [
         {
             "name": "alexposseda/filemanager",
@@ -759,16 +759,16 @@
         },
         {
             "name": "yiisoft/yii2-imagine",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-imagine.git",
-                "reference": "0961343138b65bba447de84b2b300899617e6acc"
+                "reference": "68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/0961343138b65bba447de84b2b300899617e6acc",
-                "reference": "0961343138b65bba447de84b2b300899617e6acc",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c",
+                "reference": "68ed3d96cd1895035cef3c0e9ce9cf6c2c0c7f1c",
                 "shasum": ""
             },
             "require": {
@@ -803,7 +803,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2016-09-04 15:14:08"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

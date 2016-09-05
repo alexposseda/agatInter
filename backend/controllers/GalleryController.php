@@ -2,6 +2,7 @@
     namespace backend\controllers;
 
     use backend\models\GalleryModel;
+    use backend\models\GalleryPictureModel;
     use backend\models\SearchGalleryItems;
     use common\models\GalleryCategory;
     use common\models\GalleryItem;
@@ -56,15 +57,12 @@
                     'class' => UploadAction::className(),
                     'uploadPath' => 'gallery',
                     'sessionEnable' => true,
-                    'uploadModel' => new UploadPictureModel([
+                    'uploadModel' => new GalleryPictureModel([
                                                                 'validationRules' => [
                                                                     'extensions' => 'jpg, png',
                                                                     'maxSize' => 1024 * 1024
                                                                 ]
                                                             ])
-                ],
-                'remove-picture' => [
-                    'class' => '\yii\alexposseda\fileManager\actions\RemoveAction',
                 ],
                 'error' => [
                     'class' => 'yii\web\ErrorAction',
@@ -123,8 +121,7 @@
             $id = Yii::$app->request->post('id');
             if($id){
                 $galleryItem = GalleryItem::findOne($id);
-                $result = FileManager::getInstance()
-                                     ->removeFile($galleryItem->picture);
+                $result = GalleryPictureModel::removeFile($galleryItem->picture);
                 $tmp = json_decode($result);
                 if($tmp->success){
                     $galleryItem->delete();
@@ -132,5 +129,10 @@
 
                 return $result;
             }
+        }
+
+        public function actionRemovePicture(){
+            $file = Yii::$app->request->post(FileManager::getInstance()->getAttributeName());
+            return GalleryPictureModel::removeFile($file);
         }
     }
