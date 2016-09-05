@@ -6,6 +6,7 @@
         public function up(){
             $this->insert('{{%user}}', [
                 'username'      => 'admin',
+                'email' => 'admin@example.com',
                 'password_hash' => '$2y$13$0XUYaKcX4ae0K0CIz3o60.d7cYOPUwIcWXl0Mx.xcvmSKXNUARDaS',
                 'status'        => 10
             ]);
