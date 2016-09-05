@@ -3,6 +3,7 @@
     namespace frontend\controllers;
 
 
+    use common\models\Certificate;
     use common\models\GalleryCategory;
     use common\models\Service;
     use Yii;
@@ -31,6 +32,15 @@
             return $this->render('services', ['services'=>$services, 'serviceItem' => $serviceItem]);
         }
 
+        public function actionCertificates($id = null){
+            $serviceItem = Certificate::findOne($id);
+            if(Yii::$app->request->isPjax){
+                return $this->renderAjax('_certificateItem', ['certificateItem' => $serviceItem]);
+            }
+            $certificates = Certificate::find()->asArray()->all();
+            return $this->render('certificates', ['certificates'=>$certificates, 'certificateItem' => $serviceItem]);
+        }
+
 
         public function actionTraffic($id){
             return $this->render('index');
@@ -39,10 +49,6 @@
         public function actionGallery($id){
             $gallery = GalleryCategory::findOne($id);
             return $this->render('gallery', ['gallery' => $gallery]);
-        }
-
-        public function actionCertificates(){
-            return $this->render('certificates');
         }
 
         public function actionContacts(){

@@ -42,5 +42,6 @@
                 <?php endforeach; ?>
             </ul>
         </div>
+        <div class="general-nav-bg"></div>
     </div>
 </div>

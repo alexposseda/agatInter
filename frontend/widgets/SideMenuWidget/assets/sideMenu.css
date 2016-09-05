@@ -1,0 +1,143 @@
+.menu-but {
+    display: none;
+    position: fixed;
+    width: 35px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #04396C;
+    color: white;
+    cursor: pointer;
+    z-index: 25;
+}
+
+.menu-but i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+}
+
+.general-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    z-index: 10;
+    font-family: "Bebas";
+}
+
+.general-nav-offset {
+    left: -165px;
+}
+
+.general-nav-offset .outer-nav li {
+    opacity: 0;
+}
+
+.general-nav-offset .menu-but {
+    display: block;
+}
+
+.general-nav-bg {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    min-height: 410px;
+    background-color: #689ed3;
+    z-index: 20;
+    transform: skewY(-57deg) translateY(-23%);
+    bottom: 0px;
+}
+
+.outer-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    z-index: 20;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    background-image: url(../../img/bottom-bg.png), url(../../img/top-bg.png);
+    background-position: right bottom, top left;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+.outer-nav ul {
+    position: relative;
+    z-index: 21;
+}
+
+.outer-nav li {
+    float: none;
+}
+
+.outer-nav li a {
+    color: #ffffff;
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 20px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    transition: color 0.5s ease;
+}
+
+.outer-nav li a:hover, .outer-nav li a.active {
+    color: #04396c;
+}
+
+.outer-nav li a.brand-logo {
+    height: auto;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.inner-nav {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 165px;
+    left: 0;
+    transition: left 0.5s ease;
+    background: linear-gradient(130deg, #04396c 15%, rgba(4, 57, 108, 0.8) 40%, rgba(4, 57, 108, 0.6) 60%, rgba(4, 57, 108, 0.4) 85%, rgba(4, 57, 108, 0.6) 100%);
+    z-index: 10;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.inner-nav ul {
+    width: 100%;
+}
+
+.inner-nav-item {
+    float: none;
+    text-align: center;
+    opacity: 0;
+}
+
+.inner-nav-item a {
+    color: #ffffff;
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+    line-height: 25px;
+    text-transform: uppercase;
+    transition: color 0.5s ease;
+}
+
+.inner-nav-item a:hover, .inner-nav-item a.active {
+    color: #2785c4;
+}
+
+.inner-nav.active {
+    left: 200px;
+}
+
+.inner-nav.active .inner-nav-item {
+    opacity: 1;
+}
