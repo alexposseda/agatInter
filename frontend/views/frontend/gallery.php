@@ -3,12 +3,13 @@
      * @var \yii\web\View                  $this
      * @var \common\models\GalleryCategory $gallery
      */
+    use backend\models\GalleryPictureModel;
     use frontend\assets\SlickAsset;
     use yii\alexposseda\fileManager\FileManager;
     use yii\helpers\Url;
 
     SlickAsset::register($this);
-    $this->registerJsFile('/js/slick-gallery.settings.js', ['depends'=>'frontend\assets\SlickAsset']);
+    $this->registerJsFile('/js/slick-gallery.settings.js', ['depends' => 'frontend\assets\SlickAsset']);
     $pictures = $gallery->galleryItems;
 
     $bg = Url::to('/img/pexels-photo-122164.jpeg', true);
@@ -31,8 +32,7 @@
                                         <div class="col s6">
                                             <div class="card">
                                                 <div class="card-image">
-                                                    <img src="<?= FileManager::getInstance()
-                                                                             ->getStorageUrl().$pictures[$i]->picture ?>" class="activator">
+                                                    <img src="<?= GalleryPictureModel::getThumb($pictures[$i]->picture) ?>" class="activator">
                                                 </div>
                                                 <?php if($pictures[$i]->description): ?>
                                                     <div class="card-reveal">
@@ -42,21 +42,20 @@
                                                 <?php endif; ?>
                                             </div>
                                         </div>
-                                        <?php if($pictures[$i+1]):?>
-                                        <div class="col s6">
-                                            <div class="card">
-                                                <div class="card-image">
-                                                    <img src="<?= FileManager::getInstance()
-                                                                             ->getStorageUrl().$pictures[$i + 1]->picture ?>" class="activator">
-                                                </div>
-                                                <?php if($pictures[$i + 1]->description): ?>
-                                                    <div class="card-reveal">
-                                                        <span class="card-title"><i class="material-icons right">close</i></span>
-                                                        <p><?= $pictures[$i + 1]->description ?></p>
+                                        <?php if($pictures[$i + 1]): ?>
+                                            <div class="col s6">
+                                                <div class="card">
+                                                    <div class="card-image">
+                                                        <img src="<?= GalleryPictureModel::getThumb($pictures[$i + 1]->picture) ?>" class="activator">
                                                     </div>
-                                                <?php endif; ?>
+                                                    <?php if($pictures[$i + 1]->description): ?>
+                                                        <div class="card-reveal">
+                                                            <span class="card-title"><i class="material-icons right">close</i></span>
+                                                            <p><?= $pictures[$i + 1]->description ?></p>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
-                                        </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -81,18 +80,18 @@
                                 <div class="vertical-slider-item gallery-item fullH">
                                     <div class="card">
                                         <div class="card-image">
-                                            <img data-lazy="<?= FileManager::getInstance()
-                                                                           ->getStorageUrl().$pictures[$i]->picture ?>" class="responcive-img" <?= ($pictures[$i]->description) ? 'data-caption="'.$pictures[$i]->description.'"' : ''?>>
+                                            <img data-lazy="<?= GalleryPictureModel::getBase($pictures[$i]->picture) ?>"
+                                                 class="responcive-img" <?= ($pictures[$i]->description) ? 'data-caption="'.$pictures[$i]->description.'"' : '' ?>>
                                         </div>
                                     </div>
-                                    <?php if($pictures[$i+1]):?>
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <img data-lazy="<?= FileManager::getInstance()
-                                                                           ->getStorageUrl().$pictures[$i+1]->picture ?>" class="responcive-img" <?= ($pictures[$i+1]->description) ? 'data-caption="'.$pictures[$i+1]->description.'"' : ''?>>
+                                    <?php if($pictures[$i + 1]): ?>
+                                        <div class="card">
+                                            <div class="card-image">
+                                                <img data-lazy="<?= GalleryPictureModel::getBase($pictures[$i+1]->picture) ?>"
+                                                     class="responcive-img" <?= ($pictures[$i + 1]->description) ? 'data-caption="'.$pictures[$i + 1]->description.'"' : '' ?>>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <?php endif;?>
+                                    <?php endif; ?>
                                 </div>
                             <?php endfor; ?>
                         </div>

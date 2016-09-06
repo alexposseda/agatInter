@@ -225,7 +225,7 @@
 .gallery-item-container .card {
     margin-bottom: 0 !important;
     margin-top: 0 !important;
-    height: 200px;
+    max-height: 200px;
     overflow: hidden;
 }
 
@@ -256,11 +256,11 @@
 }
 
 .gallery-list .vertical-slider-button-up {
-    top: 30px;
+    top: 10px;
 }
 
 .gallery-list .vertical-slider-button-down {
-    bottom: 30px;
+    bottom: 10px;
 }
 
 .gallery-big {

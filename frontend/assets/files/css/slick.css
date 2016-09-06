@@ -121,7 +121,7 @@
     left: 8px;
     z-index: 2;
     cursor: pointer;
-    background: url(../../img/slick-arrow-sprite.png) no-repeat;
+    background: url(../../../img/slick-arrow-sprite.png) no-repeat;
     width: 35px;
     height: 38px;
 }
