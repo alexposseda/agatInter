@@ -33,12 +33,12 @@
         }
 
         public function actionCertificates($id = null){
-            $serviceItem = Certificate::findOne($id);
+            $certificateItem = Certificate::findOne($id);
             if(Yii::$app->request->isPjax){
-                return $this->renderAjax('_certificateItem', ['certificateItem' => $serviceItem]);
+                return $this->renderAjax('_certificateItem', ['certificateItem' => $certificateItem]);
             }
             $certificates = Certificate::find()->asArray()->all();
-            return $this->render('certificates', ['certificates'=>$certificates, 'certificateItem' => $serviceItem]);
+            return $this->render('certificates', ['certificates'=>$certificates, 'certificateItem' => $certificateItem]);
         }
 
 

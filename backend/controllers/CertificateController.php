@@ -2,11 +2,12 @@
 
     namespace backend\controllers;
 
+    use backend\models\CertificateUploadModel;
     use Yii;
     use common\models\Certificate;
     use common\models\CertificateSearch;
     use yii\alexposseda\fileManager\actions\UploadAction;
-    use yii\alexposseda\fileManager\models\UploadPictureModel;
+    use yii\alexposseda\fileManager\FileManager;
     use yii\filters\AccessControl;
     use yii\web\Controller;
     use yii\web\NotFoundHttpException;
@@ -56,15 +57,12 @@
                     'class' => UploadAction::className(),
                     'uploadPath' => 'certificates',
                     'sessionEnable' => true,
-                    'uploadModel' => new UploadPictureModel([
+                    'uploadModel' => new CertificateUploadModel([
                                                                 'validationRules' => [
                                                                     'extensions' => 'jpg, png',
                                                                     'maxSize' => 1024 * 1024
                                                                 ]
                                                             ])
-                ],
-                'remove-picture' => [
-                    'class' => '\yii\alexposseda\fileManager\actions\RemoveAction',
                 ]
             ];
         }
@@ -168,5 +166,10 @@
             }else{
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
+        }
+
+        public function actionRemovePicture(){
+            $file = Yii::$app->request->post(FileManager::getInstance()->getAttributeName());
+            return CertificateUploadModel::removeFile($file);
         }
     }

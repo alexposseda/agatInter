@@ -1,5 +1,6 @@
 <?php
     namespace common\models;
+
     use Imagine\Image\Box;
     use Yii;
     use yii\alexposseda\fileManager\FileManager;
@@ -11,25 +12,23 @@
      * This is the model class for table "{{%service}}".
      *
      * @property integer $id
-     * @property string $title
-     * @property string $short_description
-     * @property string $full_description
-     * @property string $icon
+     * @property string  $title
+     * @property string  $short_description
+     * @property string  $full_description
+     * @property string  $icon
      */
     class Service extends ActiveRecord{
         /**
          * @inheritdoc
          */
-        public static
-        function tableName(){
+        public static function tableName(){
             return '{{%service}}';
         }
 
         /**
          * @inheritdoc
          */
-        public
-        function rules(){
+        public function rules(){
             return [
                 [
                     [
@@ -61,8 +60,7 @@
         /**
          * @inheritdoc
          */
-        public
-        function attributeLabels(){
+        public function attributeLabels(){
             return [
                 'id' => 'ID',
                 'title' => 'Название Услуги',
@@ -72,9 +70,9 @@
             ];
         }
 
-        public
-        function afterSave($insert, $changedAttributes){
+        public function afterSave($insert, $changedAttributes){
             $icon = json_decode($this->icon)[0];
-            FileManager::getInstance()->removeFromSession($icon);
+            FileManager::getInstance()
+                       ->removeFromSession($icon);
         }
     }

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\alexposseda\fileManager\FileManager;
 use yii\db\ActiveRecord;
 
 /**
@@ -45,5 +46,9 @@ class Certificate extends ActiveRecord
             'short_description' => 'Short Description',
             'icon' => 'Icon',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        FileManager::getInstance()->removeFromSession(json_decode($this->icon)[0]);
     }
 }

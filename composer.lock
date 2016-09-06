@@ -469,16 +469,16 @@
         },
         {
             "name": "macgyer/yii2-materializecss",
-            "version": "1.0.8",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MacGyer/yii2-materializecss.git",
-                "reference": "101a54afe32ee96186acf2617ad83dcc1d84e438"
+                "reference": "dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/101a54afe32ee96186acf2617ad83dcc1d84e438",
-                "reference": "101a54afe32ee96186acf2617ad83dcc1d84e438",
+                "url": "https://api.github.com/repos/MacGyer/yii2-materializecss/zipball/dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3",
+                "reference": "dfeb2d522cf1d2e17be74d4ae04cb2a73ca9fdf3",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +511,7 @@
                 "widgets",
                 "yii2"
             ],
-            "time": "2016-08-08 19:39:42"
+            "time": "2016-09-01 21:01:08"
         },
         {
             "name": "swiftmailer/swiftmailer",

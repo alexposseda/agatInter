@@ -2,10 +2,10 @@
     /**
      * @var \yii\web\View              $this
      * @var array                      $certificates    Certificates::find()->asArray()->all();
-     * @var \common\models\Certificate $certificateItem;
+     * @var \common\models\Certificate $certificateItem ;
      */
+    use backend\models\CertificateUploadModel;
     use frontend\assets\SlickAsset;
-    use yii\alexposseda\fileManager\FileManager;
     use yii\helpers\Url;
     use yii\widgets\Pjax;
 
@@ -19,24 +19,23 @@
             <div class="valign-wrapper">
                 <div class="valign fullWidth">
                     <?php if(!empty($certificates)): ?>
-                        <div class="vertical-slider">
+                        <div class="vertical-slider certificate-slider">
                             <?php foreach($certificates as $certificate): ?>
-                                <div class="vertical-slider-item service <?= ($certificate['id'] == Yii::$app->request->get('id')) ? 'active' : '' ?>">
+                                <div
+                                    class="vertical-slider-item certificate <?= ($certificate['id'] == Yii::$app->request->get('id')) ? 'active' : '' ?>">
                                     <a href="<?= Url::to([
-                                                             'services',
+                                                             'certificates',
                                                              'id' => $certificate['id']
-                                                         ]) ?>" class="service-link">
-                                        <div class="service-small row">
-                                            <div class="service-icon">
-                                                <img src="<?= FileManager::getInstance()
-                                                                         ->getStorageUrl().json_decode($certificate['icon'])[0] ?>"
-                                                     class="responsive-img">
+                                                         ]) ?>" class="certificate-link card horizontal certificate-small">
+                                            <div class="card-image">
+                                                <img src="<?= CertificateUploadModel::getThumb(json_decode($certificate['icon'])[0]) ?>">
                                             </div>
-                                            <div class="service-content">
-                                                <p class="service-title"><?= $certificate['title'] ?></p>
-                                                <p class="service-description"><?= $certificate['short_description'] ?></p>
+                                            <div class="card-stacked">
+                                                <div class="card-title"><?= $certificate['title']?></div>
+                                                <div class="card-content">
+                                                    <?= $certificate['short_description'] ?>
+                                                </div>
                                             </div>
-                                        </div>
                                     </a>
                                 </div>
                             <?php endforeach; ?>
@@ -57,14 +56,14 @@
                                   'options' => ['class' => 'fullHeight service-wrap']
                               ]) ?>
             <?php if(!is_null($certificateItem)): ?>
-                <?= $this->render('_serviceItem', ['serviceItem' => $certificateItem]) ?>
+                <?= $this->render('_certificateItem', ['certificateItem' => $certificateItem]) ?>
             <?php else: ?>
                 <div class="valign-wrapper" id="baseContent">
                     <div class="valign white-text fullWidth">
                         <p class="title center-align">Наши сертификаты</p>
                     </div>
                 </div>
-            <?php endif;?>
+            <?php endif; ?>
             <?php Pjax::end() ?>
             <div id="preloader" class="valign-wrapper">
                 <div class="preloader-content valign fullWidth">

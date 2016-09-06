@@ -3,11 +3,11 @@
      * @var \yii\base\View             $this
      * @var \common\models\Certificate $certificateItem
      */
-    use yii\alexposseda\fileManager\FileManager;
+    use backend\models\CertificateUploadModel;
 
 ?>
 <div class="certificate-big white fullHeight">
     <div class="certificate-big-content fullHeight">
-        <img src="<?= FileManager::getInstance()->getStorageUrl().$certificateItem->icon ?>" alt="<?= $certificateItem->title?>">
+        <img src="<?= CertificateUploadModel::getBase(json_decode($certificateItem->icon)[0]) ?>" alt="<?= $certificateItem->title?>">
     </div>
 </div>
