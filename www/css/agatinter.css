@@ -314,7 +314,7 @@
 }
 
 .big-picture img {
-    width: 100%;
+    max-width: 100%;
     opacity: 0;
 }
 

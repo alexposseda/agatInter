@@ -46,10 +46,11 @@ function getBaseSetting(){
 }
 
 function showBigPicture(){
+    var src = $(this).attr('src').replace(/base_/, '');
     $('#big-picture').fadeIn(500);
     $('#big-picture')
         .find('img')
-        .attr('src', $(this).attr('src'))
+        .attr('src', src)
         .animate({
             opacity: 1,
         }, 500);

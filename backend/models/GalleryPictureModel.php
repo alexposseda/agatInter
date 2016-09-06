@@ -34,33 +34,15 @@
             $picture = Image::getImagine()
                             ->open(FileManager::getInstance()
                                               ->getStoragePath().$this->savePath);
-            $pictureSize = $picture->getSize();
-            $pictureK = self::BASE['width']/self::BASE['height'];
 
-            if($pictureSize->getWidth() > self::BASE['width']){
-                $width = $pictureSize->getWidth() / $pictureK;
-                $cropX = ($pictureSize->getWidth() - $width) / 2;
-            }else{
-                $width = $pictureSize->getWidth();
-                $cropX = 0;
-            }
-            if($pictureSize->getHeight() > self::BASE['height']){
-                $height = $pictureSize->getHeight() / $pictureK;
-                $cropY = ($pictureSize->getHeight() - $height) / 2;
-            }else{
-                $height = $pictureSize->getHeight();
-                $cropY = 0;
-            }
-
-            $cropBox = new Box(self::BASE['width'], self::BASE['height']);
             $thumbBox = new Box(self::THUMB['width'], self::THUMB['height']);
             $baseName = FileManager::getInstance()
                                    ->getStoragePath().$directory.DIRECTORY_SEPARATOR.self::BASE_PREFIX.$fileName.'.'.$this->file->extension;
             $thumbName = FileManager::getInstance()
                                    ->getStoragePath().$directory.DIRECTORY_SEPARATOR.self::THUMB_PREFIX.$fileName.'.'.$this->file->extension;
 
-            $picture->resize($cropBox)->save($baseName);
-            $picture->thumbnail($thumbBox)->save($thumbName);
+            $picture->thumbnail(new Box(self::BASE['width'], self::BASE['height']))->save($baseName, ['quality' => 100]);
+            $picture->thumbnail($thumbBox)->save($thumbName, ['quality' => 100]);
 
             return $this;
         }
