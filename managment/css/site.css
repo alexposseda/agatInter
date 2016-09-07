@@ -109,3 +109,13 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+.service-index .grid-view table td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+img {
+    max-width: 100%;
+}
