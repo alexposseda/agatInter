@@ -110,13 +110,12 @@ a.desc:after {
     text-decoration: none;
 }
 
-.traffic-item-edit-btn{
-    color: orange!important;
-    margin: 0 5px;
+.service-index .grid-view table td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.traffic-item-remove-btn{
-    color: red!important;
-}
-.traffic-item-add-btn{
-    margin-bottom: 10px;
+
+img {
+    max-width: 100%;
 }
