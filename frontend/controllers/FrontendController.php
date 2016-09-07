@@ -6,6 +6,8 @@
     use common\models\Certificate;
     use common\models\GalleryCategory;
     use common\models\Service;
+    use common\models\TrafficCategory;
+    use common\models\TrafficItem;
     use Yii;
     use yii\web\Controller;
 
@@ -42,8 +44,15 @@
         }
 
 
-        public function actionTraffic($id){
-            return $this->render('index');
+        public function actionTraffic($id, $trafficId = null){
+            $trafficCategory = TrafficCategory::findOne($id);
+            $trafficItem = TrafficItem::findOne($trafficId);
+//            if(Yii::$app->request->isPjax){
+//                return $this->renderAjax('_trafficItem', ['trafficItem' => $trafficItem]);
+//            }
+
+            return $this->render('traffic', ['trafficCategory'=>$trafficCategory, 'trafficItem' => $trafficItem]);
+
         }
 
         public function actionGallery($id){

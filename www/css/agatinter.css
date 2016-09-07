@@ -406,3 +406,25 @@
     background-color: #fff;
     transition: right 0.5s ease 1s;
 }
+.map-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.map{
+    width: 100%;
+    height: 100%;
+}
+.traffic-item{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40%;
+    background: white;
+}
+#links{
+    display: none;
+}
