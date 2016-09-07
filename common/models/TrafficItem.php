@@ -1,11 +1,9 @@
 <?php
+
     namespace common\models;
-    use Imagine\Image\Box;
+
     use Yii;
     use yii\alexposseda\fileManager\FileManager;
-    use yii\db\ActiveRecord;
-    use yii\helpers\FileHelper;
-    use yii\imagine\Image;
 
     /**
      * This is the model class for table "{{%traffic_item}}".
@@ -15,10 +13,13 @@
      * @property string          $title
      * @property string          $cover
      * @property string          $description
+     * @property string          $coordinates
+     * @property integer         $iconId
      *
      * @property TrafficCategory $category
+     * @property TrafficItemIcon $icon
      */
-    class TrafficItem extends ActiveRecord{
+    class TrafficItem extends \yii\db\ActiveRecord{
         /**
          * @inheritdoc
          */
@@ -31,15 +32,46 @@
          */
         public function rules(){
             return [
-                [['categoryId'], 'integer'],
-                [['description'], 'string'],
-                [['title', 'cover'], 'string', 'max' => 255],
+                [
+                    [
+                        'title',
+                        'iconId'
+                    ],
+                    'required'
+                ],
+                [
+                    [
+                        'categoryId',
+                        'iconId'
+                    ],
+                    'integer'
+                ],
+                [
+                    ['description'],
+                    'string'
+                ],
+                [
+                    [
+                        'title',
+                        'cover',
+                        'coordinates'
+                    ],
+                    'string',
+                    'max' => 255
+                ],
                 [
                     ['categoryId'],
                     'exist',
                     'skipOnError' => true,
                     'targetClass' => TrafficCategory::className(),
                     'targetAttribute' => ['categoryId' => 'id']
+                ],
+                [
+                    ['iconId'],
+                    'exist',
+                    'skipOnError' => false,
+                    'targetClass' => TrafficItemIcon::className(),
+                    'targetAttribute' => ['iconId' => 'id']
                 ],
             ];
         }
@@ -54,6 +86,8 @@
                 'title' => 'Название',
                 'cover' => 'Cover',
                 'description' => 'Описание',
+                'coordinates' => 'Coordinates',
+                'iconId' => 'Иконка',
             ];
         }
 
@@ -64,11 +98,19 @@
             return $this->hasOne(TrafficCategory::className(), ['id' => 'categoryId']);
         }
 
+        /**
+         * @return \yii\db\ActiveQuery
+         */
+        public function getIcon(){
+            return $this->hasOne(TrafficItemIcon::className(), ['id' => 'iconId']);
+        }
+
         public function afterSave($insert, $changedAttributes){
-            $photos = json_decode($this->cover);
-            if(is_array($photos)){
-                foreach($photos as $photo){
-                    FileManager::getInstance()->removeFromSession($photo);
+            $files = json_decode($this->cover);
+            if($files){
+                foreach($files as $file){
+                    FileManager::getInstance()
+                               ->removeFromSession($file);
                 }
             }
         }

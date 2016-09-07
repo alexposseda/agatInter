@@ -14,9 +14,6 @@
      *
      * @property integer       $id
      * @property string        $title
-     * @property string        $description
-     * @property string        $cover
-     * @property string        $map
      *
      * @property TrafficItem[] $trafficItems
      */
@@ -33,9 +30,7 @@
          */
         public function rules(){
             return [
-                [['title', 'description'], 'required'],
-                [['description', 'map'], 'string'],
-                [['title', 'cover'], 'string', 'max' => 255],
+                [['title'], 'required']
             ];
         }
 
@@ -46,9 +41,6 @@
             return [
                 'id'          => 'ID',
                 'title'       => 'Название',
-                'description' => 'Описание',
-                'cover'       => 'Обложка',
-                'map'         => 'Карта',
             ];
         }
 
@@ -57,10 +49,5 @@
          */
         public function getTrafficItems(){
             return $this->hasMany(TrafficItem::className(), ['categoryId' => 'id']);
-        }
-
-        public function afterSave($insert, $changedAttributes){
-            $icon = json_decode($this->cover)[0];
-            FileManager::getInstance()->removeFromSession($icon);
         }
     }

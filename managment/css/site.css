@@ -109,3 +109,14 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+.traffic-item-edit-btn{
+    color: orange!important;
+    margin: 0 5px;
+}
+.traffic-item-remove-btn{
+    color: red!important;
+}
+.traffic-item-add-btn{
+    margin-bottom: 10px;
+}

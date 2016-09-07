@@ -1,13 +1,33 @@
 <?php
+    use backend\assets\MapAsset;
     use backend\models\SearchTrafficItem;
     use yii\alexposseda\fileManager\FileManager;
     use yii\helpers\Html;
+    use yii\web\View;
     use yii\widgets\ListView;
     use yii\widgets\Pjax;
 
     /** @var SearchTrafficItem $searchModel */
     /** @var \yii\data\ActiveDataProvider $dataProvider */
     /** @var array $traffCategoryModel */
+
+    MapAsset::register($this);
+    $this->registerJsFile('js/baseMap.js', ['depends' => 'backend\assets\MapAsset']);
+
+    $trafficItems = $dataProvider->getModels();
+    if(!is_null($trafficItems)){
+        $otherMarkers = [];
+        foreach($trafficItems as $otherMarker){
+            $otherMarkers[] = [
+                'title' => $otherMarker->title,
+                'id' => $otherMarker->id,
+                'coordinates' => $otherMarker->coordinates,
+                'icon' => FileManager::getInstance()->getStorageUrl().$otherMarker->icon->icon
+            ];
+        }
+        $otherMarkers = json_encode($otherMarkers);
+        $this->registerJs('var otherMarkers='.$otherMarkers.';', View::POS_END);
+    }
 ?>
 
 <div class="row">
@@ -44,7 +64,7 @@
                             endforeach;
                         else:
                             ?>
-                            <div class="alert alert-warning"><strong>Не найдено ни одного вида перевозкиа</strong></div>
+                            <div class="alert alert-warning"><strong>Не найдено ни одного вида перевозки</strong></div>
                             <?php
                         endif;
                     ?>
@@ -59,20 +79,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h2 class="panel-title"><?= $searchModel->category->title ?></h2></div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-3 col-lg-2">
-                            <img src="<?= FileManager::getInstance()
-                                                     ->getStorageUrl().json_decode($searchModel->category->cover)[0] ?>"
-                                 class="img-responsive">
-                        </div>
-                        <div class="col-sm-12 col-md-9 col-lg-5">
-                            <p><?= $searchModel->category->description ?></p>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-5">
-                            <p>Map</p>
+                    <div class="panel-body">
+                        <div class="map-wrapper">
+                            <div id="map"></div>
                         </div>
                     </div>
-
                 </div>
                 <div class="panel-footer">
                     <?= Html::a('Создать Транспорт', ['item-create', 'categoryId' => $searchModel->categoryId],

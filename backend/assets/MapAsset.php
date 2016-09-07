@@ -5,7 +5,7 @@
     use yii\web\AssetBundle;
 
     class MapAsset extends AssetBundle{
-        const APIKEY = '';
+        const APIKEY = 'AIzaSyBTUQD7LyzcjXqAjCONxvNMSYCyvdnQ5Cw';
 
         public $sourcePath = '@backend/assets/files/map/';
 
